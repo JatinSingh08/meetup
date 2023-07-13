@@ -153,42 +153,49 @@ const Event = () => {
           <button className="px-6 mx-auto py-2 bg-red-500 rounded-lg"
           onClick={() => setRsvpModalOpen(true)}
           >
-            RSVP
+            {event?.rsvp ? "Already RSVPed" : "RSVP"}
           </button>
           {
             rsvpModalOpen && 
             (
-            <Modal
-            title="RSVP"
-            open={() => setRsvpModalOpen(true)}
-            footer={null}
-            onCancel={() => setRsvpModalOpen(false)}
-            onOk={() => dispatch({ type: ADD_TO_RSVP, payload: {id: event?.id, rsvp: true} })}
+              <Modal
+              title="RSVP"
+              visible={rsvpModalOpen}
+              footer={null}
+              onCancel={() => setRsvpModalOpen(false)}
+              onOk={() => {
+                dispatch({ type: ADD_TO_RSVP, payload: { id: event?.id, rsvp: true } });
+                setRsvpModalOpen(false);
+              }}
             >
               <div className="flex flex-col gap-4">
-               <div>
-                <h1 className="text-2xl font-semibold">Complete Your RSVP</h1>
+                <div>
+                  <h1 className="text-2xl font-semibold">Complete Your RSVP</h1>
                   <p>Fill in your personal information</p>
-               </div>
+                </div>
                 <div className="flex flex-col gap-6">
                   <label htmlFor="name" className="text-xl font-medium flex flex-col gap-2">
                     Name:
                     <input type="text" className="rounded-lg outline-blue-400 bg-rose-50 h-10" />
                   </label>
-                  <label htmlFor="email" className="text-xl font-medium flex flex-col  gap-2">
+                  <label htmlFor="email" className="text-xl font-medium flex flex-col gap-2">
                     Email:
                     <input type="email" className="rounded-lg outline-blue-400 bg-rose-50 h-10" />
                   </label>
-
                 </div>
                 <p className="text-md text-blue-400">*You have to make the payment at the venue.</p>
-                <button className="bg-red-500 rounded-lg shadow-md text-white py-2"
-                onClick={() => dispatch({ type: ADD_TO_RSVP, payload: {id: event?.id, rsvp: true} })}
+                <button
+                  className="bg-red-500 rounded-lg shadow-md text-white py-2"
+                  onClick={() => {
+                    dispatch({ type: ADD_TO_RSVP, payload: { id: event?.id, rsvp: true } });
+                    setRsvpModalOpen(false);
+                  }}
                 >
-                  {event?.rsvp ? "Already RSVPed" : "RSVP"}
+                  RSVP
                 </button>
               </div>
             </Modal>
+            
             )
           }
       </div>

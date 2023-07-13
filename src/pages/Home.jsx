@@ -15,7 +15,7 @@ const Home = () => {
         <select name="eventType" id="eventType" className='cursor-pointer  h-10 bg-white drop-shadow-md rounded-md px-1'
         onChange={(e) => dispatch({ type: FITER_BY_DROPDOWN, payload: e.target.value})}
         >
-          <option value="Select" disabled>Select Event Type</option>
+          <option defaultValue="select" disabled>Select Event Type</option>
           <option value="offline">Offline</option>
           <option value="online">Online</option>
           <option value="both" selected>Both</option>
