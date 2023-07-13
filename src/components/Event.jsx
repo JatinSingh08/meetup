@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { meetupsData } from "../data/data";
 import Modal from "antd/es/modal/Modal";
 import { MeetupContext } from "../context/meetup-context";
+import { ADD_TO_RSVP } from "../reducers/constant";
 
 const Event = () => {
   const { id } = useParams();
@@ -162,6 +163,7 @@ const Event = () => {
             open={() => setRsvpModalOpen(true)}
             footer={null}
             onCancel={() => setRsvpModalOpen(false)}
+            onOk={() => dispatch({ type: ADD_TO_RSVP, payload: {id: event?.id, rsvp: true} })}
             >
               <div className="flex flex-col gap-4">
                <div>
@@ -180,8 +182,10 @@ const Event = () => {
 
                 </div>
                 <p className="text-md text-blue-400">*You have to make the payment at the venue.</p>
-                <button className="bg-red-500 rounded-lg shadow-md text-white py-2 ">
-                  RSVP
+                <button className="bg-red-500 rounded-lg shadow-md text-white py-2"
+                onClick={() => dispatch({ type: ADD_TO_RSVP, payload: {id: event?.id, rsvp: true} })}
+                >
+                  {event?.rsvp ? "Already RSVPed" : "RSVP"}
                 </button>
               </div>
             </Modal>

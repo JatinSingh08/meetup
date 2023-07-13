@@ -1,2 +1,3 @@
 export const FILTER_BY_SEARCH = "FILTER_BY_SEARCH";
 export const FITER_BY_DROPDOWN = "FILTER_BY_DROPDOWN";
+export const ADD_TO_RSVP = "ADD_TO_RSVP";
