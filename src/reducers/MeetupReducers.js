@@ -12,12 +12,22 @@ export const initialState = {
 export const MeetupReducer = (state, action) => {
   switch (action.type) {
     case FILTER_BY_SEARCH:
+      const searchValue = action.payload.toLowerCase();
+      const filteredMeetups = meetupsData.meetups.filter(
+        (meetup) =>
+          meetup.title.toLowerCase().includes(searchValue) ||
+          meetup.eventTags.some((event) => event.toLowerCase().includes(searchValue))
+      );
       return {
         ...state,
-        meetupsData: state.meetupsData.filter(meetup => meetup.title.toLowerCase().includes(action.payload.toLowerCase()) || meetup.eventTags.some(event => event.toLowerCase().includes(action.payload.toLowerCase())) )
-      }
-  
+        meetupsData: filteredMeetups,
+        filters: {
+          ...state.filters,
+          searchValue: action.payload,
+        },
+      };
+
     default:
-      break;
+      return state;
   }
-}
+};
