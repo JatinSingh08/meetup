@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { meetupsData } from "../data/data";
 import Modal from "antd/es/modal/Modal";
+import { MeetupContext } from "../context/meetup-context";
 
 const Event = () => {
   const { id } = useParams();
   const [rsvpModalOpen, setRsvpModalOpen] = useState(false);
+  const { state, dispatch } = useContext(MeetupContext);
 
   const event = meetupsData?.meetups?.find((meetup) => meetup.id === id);
 

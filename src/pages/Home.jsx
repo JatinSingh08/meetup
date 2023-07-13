@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { meetupsData } from '../data/data'
 import { EventCard } from '../components'
+import { MeetupContext } from '../context/meetup-context'
 
 const Home = () => {
+  const { state, dispatch } = useContext(MeetupContext);
+
+
   return (
     <div className=''>
       <div className='flex items-center justify-between'>
@@ -16,7 +20,7 @@ const Home = () => {
       </div>
       <div className='grid grid-cols-3 mt-4 gap-12 justify-center items-center '>
         {
-          meetupsData.meetups.map(event => (
+          state.meetupsData.map(event => (
             <EventCard 
             key={event?.id}
             event={event}

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { MeetupContext } from '../context/meetup-context';
+import { FILTER_BY_SEARCH } from '../reducers/constant';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { dispatch } = useContext(MeetupContext);
 
   return (
     <div className='flex h-24 items-center justify-between border-b mb-4'>
@@ -31,8 +34,9 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="Search by title and tag"
-            className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md  bg-[#ffffff] focus:bg-[#ffece2] focus:outline-none "
+            className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md  bg-[#ffffff focus:outline-none "
             name="searchValue"
+            onChange={(e) => dispatch({ type: FILTER_BY_SEARCH, payload: e.target.value})}
             // value={state.filters.searchValue}
           />
         </div>
